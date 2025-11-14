@@ -1,0 +1,25 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+remappings = [
+  '@chainlink/contracts/=lib/chainlink-brownie-contracts/contracts/',
+  '@solmate=lib/solmate/src/tokens/ERC20',
+
+]
+
+fs_permissions = [
+  { access = "read", path = "./broadcast" },
+  { access = "read", path = "./reports" },
+]
+
+[fuzz]
+runs = 256
+
+anvil = "http://localhost:8545"
+[rpc_endpoints]
+#SEPOLIA_RPC_URL = "https://eth-sepolia.g.alchemy.com/v2/RxXZAAx0s3Jt9gHNs_2h1"
+SEPOLIA_RPC_URL = "https://eth-sepolia.g.alchemy.com/v2/k5MK_5Ldq0-svV0PUS6UD"
+ETHERSCAN_API_KEY = "PNXI9TJY9T95E95WYVCQFDMYE7GNV7IEKN"
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
