@@ -11,10 +11,11 @@ anvil = "http://localhost:8545"
 
 
 [rpc_endpoints]
-SEPOLIA_RPC_URL = "https://eth-sepolia.g.alchemy.com/v2/RxXZAAx0s3Jt9gHNs_2h1"
+sepolia = "${SEPOLIA_RPC_URL}"
+
 
 [etherscan]
-sepolia = { key = "PNXI9TJY9T95E95WYVCQFDMYE7GNV7IEKN" }
+sepolia = { key = "${ETHERSCAN_API_KEY}" }
 
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
