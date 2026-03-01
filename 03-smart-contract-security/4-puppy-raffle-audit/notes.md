@@ -439,3 +439,13 @@ contract forceSend
     
 
 # Patric's findings about this withdrawFees() function DoS and Mitigation.
+
+
+
+
+
+
+
+
+
+

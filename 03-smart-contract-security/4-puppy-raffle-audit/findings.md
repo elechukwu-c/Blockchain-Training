@@ -522,7 +522,7 @@ it's best to keep code clean and follow CEI (Checks, Effect, Interaction)
 +        require(success, "PuppyRaffle: Failed to send prize pool to winner");
 ```
 
-### [I-5] ### [I-5] Use of "magic" numbers is discouraged
+### [I-5] Use of "magic" numbers is discouraged
 ​
 It can be confusing to see number literals in a codebase, and it's much more readable if the numbers are given a name.
 ​

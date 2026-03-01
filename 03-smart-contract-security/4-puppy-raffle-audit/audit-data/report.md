@@ -1,59 +1,106 @@
-<!--div align="center"-->
-<div style="text-align:center; margin-top:20px;">
+<img src="./logo.png" width="600" style="display:block;margin:0 auto;margin-top:80px;" />
 
-<!-- Styles for code blocks and spacing -->
 <style>
-/* Code styling */
-pre {
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
     
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 10px;
-    font-size: 0.9em;
-    overflow-x: auto;
-}
-code {
-    font-family: Consolas, 'Courier New', monospace;
 }
 
-/* Reduce top spacing for pages */
-body {
-    margin-top: 10mm;
+/* Page break utility */
+.page-break {
+    page-break-after: always;
 }
+
+
+ /* REMOVE automatic heading underlines added by Markdown PDF */
+h1, h2, h3, h4, h5, h6 {
+    border-bottom: none !important;
+    text-decoration: none !important;
+}
+
+/* Also neutralize accidental HR styling */
+hr {
+    display: none !important;
+}
+
+ /* Global heading thickness (strong-level) */
+h1, h2, h3, h4, h5, h6 {
+   
+    font-weight: 600 !important;
+}
+
+/* Explicit size hierarchy (Markdown PDF override) */
+h1 { font-size: 24px !important; }
+h2 { font-size: 23px !important; }
+h3 { font-size: 20px !important; }
+h4 { font-size: 17px !important; }
+h5 { font-size: 15px !important; }
+h6 { font-size: 13px !important; }
+
 </style>
 
-<!-- Cover Page -->
-<img src="./logo.png" width="300" style="display:block; margin:0 auto;" />
 
-# **PuppyRaffle Protocol Audit Report**
+<div>
 
-### Version 1.0
 
-**Prepared by:** Cyfrin.io-Student-Elechukwu  
+<h1 style="text-align:center;margin-top:60px;">
+<strong>PuppyRaffle Protocol Audit Report</strong>
+</h1>
 
-**Date:** February 17, 2026
+<h3 style="text-align:center;margin-top:20px;">
+Version 1.0
+</h3>
+
+<p style="text-align:center;margin-top:80px;">
+Cyfrin.io-Student-Elechukwu
+</p><br>
+
+<br><p style="text-align:center;margin-top:50px;">
+February 17, 2026
+</p>
 
 </div>
 
-<!-- Prepared By -->
-## Prepared By
-
-**Auditor:** Cyfrin.io-Student-Elechukwu  
-**Affiliation:** Cyfrin  
-- https://cyfrin.io  
-- https://github.com/Azel-C/Blockchain-Training  
-
-**Lead Auditors:**
-- xxxxxxx
-
----
+<div class="page-break"></div>
 
 
-# Table of Contents
-- [**PuppyRaffle Protocol Audit Report**](#puppyraffle-protocol-audit-report)
-    - [Version 1.0](#version-10)
-  - [Prepared By](#prepared-by)
-- [Table of Contents](#table-of-contents)
+
+<h4 style="text-align:center;margin-top:40px;">
+PuppyRaffle Protocol Audit Report
+</h4>
+
+<p style="text-align:center;margin-top:40px;">
+Cyfrin.io-Student-Elechukwu
+</p>
+
+<p style="text-align:center;margin-top:40px;">
+February 17, 2026
+</p><br> <br> <br> <br> <br> <br> <br>
+
+
+
+<br> <br> <br> <br> <br> <br> <br> <br>
+<h3 style="text-align:left;margin-top:120;">
+<strong>PuppyRaffle Protocol Audit Report</strong>
+</h3>
+ 
+ <p style="text-align:left;">
+    Prepared By<br>
+Cyfrin.io-Student-Elechukwu
+</p>
+
+<p style="text-align:left;">
+    Date<br>
+February 17, 2026
+</p>
+
+<div class="page-break"></div>
+
+<h3 style="text-align:left;">
+ <strong>Table of Contents</strong>
+ </h3>
+ 
 - [Protocol Summary](#protocol-summary)
 - [Disclaimer](#disclaimer)
 - [Risk Classification](#risk-classification)
@@ -62,7 +109,6 @@ body {
   - [Roles](#roles)
 - [Executive Summary](#executive-summary)
   - [Issues found](#issues-found)
-  - [| **Total**     | **16**           |](#-total------16-----------)
 - [Findings](#findings)
 - [High](#high)
     - [\[H-1\] Reentrancy attack on `PuppyRaffle::refund()` allows entrant to drain raffle balance.](#h-1-reentrancy-attack-on-puppyrafflerefund-allows-entrant-to-drain-raffle-balance)
@@ -80,26 +126,27 @@ body {
     - [\[I-2\] Using an Outdated Version of Solidity is Not Recommended](#i-2-using-an-outdated-version-of-solidity-is-not-recommended)
     - [\[I-3\] Missing checks for `address(0)` when assigning values to address state variables](#i-3-missing-checks-for-address0-when-assigning-values-to-address-state-variables)
     - [\[I-4\] `PuppyRaffle::selectWinner` does not follow CEI, which is not best practice.](#i-4-puppyraffleselectwinner-does-not-follow-cei-which-is-not-best-practice)
-    - [\[I-5\] ### \[I-5\] Use of "magic" numbers is discouraged](#i-5--i-5-use-of-magic-numbers-is-discouraged)
+    - [\[I-5\] Use of "magic" numbers is discouraged](#i-5-use-of-magic-numbers-is-discouraged)
     - [\[I-6\] State Changes are Missing Events](#i-6-state-changes-are-missing-events)
     - [\[I-7\] \_isActivePlayer is never used and should be removed](#i-7-_isactiveplayer-is-never-used-and-should-be-removed)
 - [Gas](#gas)
     - [\[G-1\] Unchanged state variables should be declared constant or immutable.](#g-1-unchanged-state-variables-should-be-declared-constant-or-immutable)
     - [\[G-2\] Storage variables in a loop should be cached](#g-2-storage-variables-in-a-loop-should-be-cached)
 
----
+
+<div class="page-break"></div>
 
 # Protocol Summary
 
 PuppyRaffle is a decentralized raffle protocol that allows users to enter raffles by paying an entrance fee. At the end of each raffle, a winner is selected pseudo-randomly, awarded the prize pool, and minted an NFT representing the winning puppy. The protocol also collects fees that can later be withdrawn by a designated fee address.
 
----
+
 
 # Disclaimer
 
 The Elechukwu C audit team makes all efforts to identify as many security vulnerabilities as possible within the given time frame but makes no guarantees regarding the completeness of the findings. This audit does not constitute an endorsement of the protocol. The review was time-boxed and focused solely on the security aspects of the Solidity smart contract implementation.
 
----
+
 
 # Risk Classification
 
@@ -112,7 +159,7 @@ The Elechukwu C audit team makes all efforts to identify as many security vulner
 
 Severity classification follows the CodeHawks severity matrix.
 
----
+
 
 # Audit Details
 
@@ -126,7 +173,7 @@ Severity classification follows the CodeHawks severity matrix.
 - **Winner:** Selected raffle participant
 - **Fee Address:** Address entitled to protocol fees
 
----
+
 
 # Executive Summary
 
@@ -142,11 +189,11 @@ The PuppyRaffle protocol was reviewed for security vulnerabilities, logic flaws,
 | Informational | 7                |
 | Gas           | 2                |
 | **Total**     | **16**           |
----
+
 
 # Findings
 
----
+
 
 # High
 
@@ -266,7 +313,7 @@ Add this contract too:-
      }
 ```
 
----
+
 
 ### [H-2] Weak randomness in `PuppyRaffle::selectWinner()` allows users to influence or predict the winner and influence or predict the winning puppy.
 
@@ -575,7 +622,7 @@ Players at index 0 may believe they have not entered and waste gas.
 **Recommended Mitigation:**  
 Revert when the player is not found or return a sentinel value such as `-1`.
 
----
+
 
 # Informational
 
@@ -640,7 +687,7 @@ it's best to keep code clean and follow CEI (Checks, Effect, Interaction)
 +        require(success, "PuppyRaffle: Failed to send prize pool to winner");
 ```
 
-### [I-5] ### [I-5] Use of "magic" numbers is discouraged
+### [I-5] Use of "magic" numbers is discouraged
 ​
 It can be confusing to see number literals in a codebase, and it's much more readable if the numbers are given a name.
 ​
@@ -691,7 +738,7 @@ Examples:
 -    }
 ``` 
 
----
+
 
 # Gas
 

@@ -1,0 +1,15 @@
+{
+  "markdown-pdf.format": "A4",
+  // "markdown-pdf.orientation": "portrait",
+  // "markdown-pdf.margin.top": "15mm",
+  // "markdown-pdf.margin.bottom": "15mm",
+  // "markdown-pdf.margin.left": "15mm",
+  // "markdown-pdf.margin.right": "15mm",
+  "markdown-pdf.displayHeaderFooter": false,
+  // "markdown-pdf.headerTemplate": "",
+  //"markdown-pdf.footerTemplate": "<div style='font-size:10px; width:100%; text-align:center;'>Page <span class='pageNumber'></span> of <span class='totalPages'></span></div>",
+  // "markdown-pdf.highlight": true,
+  // "markdown-pdf.highlightStyle": "github.css",
+  // "markdown-pdf.printBackground": true,
+  "markdown-pdf.scale": 1
+}
